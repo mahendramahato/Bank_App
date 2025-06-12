@@ -1,0 +1,101 @@
+create database login;
+show databases;
+
+use login;
+
+create table users(
+	id int auto_increment primary key,
+    name varchar(100) not null unique,
+    password varchar(100) not null,
+    created_at timestamp default current_timestamp    
+);
+
+insert into users (name, password)
+values
+	('admin', 'admin'),
+    ('bob', 'bob');
+
+select * from users;
+
+## creating db for account servlet
+
+create database account;
+use account;
+
+create table account(
+	id int primary key auto_increment,
+    name varchar(100),
+    dob date,
+    address varchar(100),
+    email varchar(100),
+    account_type varchar(20)
+);
+
+alter table account modify dob date;
+
+alter table account add account_number int;
+
+alter table account modify account_number int;
+alter table account add amount double;
+
+
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL,
+    type VARCHAR(10) CHECK (type IN ('debit', 'credit')),
+    amount DOUBLE NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO transactions (account_id, type, amount) VALUES
+(101, 'debit', 200),
+(101, 'credit', 500),
+(101, 'debit', 100),
+(102, 'credit', 300),
+(102, 'debit', 150);
+
+Drop table transactions;
+
+select * from transactions;
+
+Drop table accounts;
+
+CREATE TABLE accounts (
+    account_id INT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(50),
+    account_holder VARCHAR(100),
+    balance DOUBLE NOT NULL
+);
+
+INSERT INTO accounts (account_id, username, password, account_holder, balance) VALUES
+(101, 'user1', 'pass123', 'Mahendra', 1000.00),
+(102, 'user2', 'secret456', 'Admin', 2000.00);
+
+select * from accounts;
+
+Drop table transactions;
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT,
+    type VARCHAR(20), -- 'deposit' or 'withdraw'
+    amount DECIMAL(10, 2),
+    cheque_no VARCHAR(50),
+    description TEXT,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+select * from transactions;
+
+SELECT * FROM transactions WHERE account_id = '101';
+
+create table credit_card(
+	card_holder varchar(100),
+	card_number varchar(20) primary key,
+    ccv varchar(4)
+);
+
+insert into credit_card(card_holder, card_number, ccv) 
+values ('John Doe', '0000111122223333', '225');
+
+select * from credit_card;
+
